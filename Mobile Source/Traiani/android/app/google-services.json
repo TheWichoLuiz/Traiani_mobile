@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "258392629437",
+    "firebase_url": "https://traiani-4089a.firebaseio.com",
+    "project_id": "traiani-4089a",
+    "storage_bucket": "traiani-4089a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:258392629437:android:e4f6ec225863c37a3d97d4",
+        "android_client_info": {
+          "package_name": "com.alekla.Traiani"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "258392629437-lah9d113h17f8ti9m3vgaiuosjo3j8f8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.alekla.Traiani",
+            "certificate_hash": "e37e9f227908bb687b8ce0e9e444eeb0e98402aa"
+          }
+        },
+        {
+          "client_id": "258392629437-d4hm79elm8vas8l9181ivve8odervp3g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyChd56bpau20Cfq8Zm7OqCe_d2-FgNY0CI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "258392629437-d4hm79elm8vas8l9181ivve8odervp3g.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "258392629437-qn0rcu1e43r7gg25i369urm9jqo78nd6.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.alekla.Traiani"
+              }
+            }
+          ]
+        }
+      },
+      "admob_app_id": "ca-app-pub-7382185127986341~2614090554"
+    }
+  ],
+  "configuration_version": "1"
+}

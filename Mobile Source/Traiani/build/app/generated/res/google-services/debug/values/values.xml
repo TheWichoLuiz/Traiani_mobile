@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">258392629437-d4hm79elm8vas8l9181ivve8odervp3g.apps.googleusercontent.com</string>
+    <string name="firebase_database_url" translatable="false">https://traiani-4089a.firebaseio.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">258392629437</string>
+    <string name="google_api_key" translatable="false">AIzaSyChd56bpau20Cfq8Zm7OqCe_d2-FgNY0CI</string>
+    <string name="google_app_id" translatable="false">1:258392629437:android:e4f6ec225863c37a3d97d4</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyChd56bpau20Cfq8Zm7OqCe_d2-FgNY0CI</string>
+    <string name="google_storage_bucket" translatable="false">traiani-4089a.appspot.com</string>
+    <string name="project_id" translatable="false">traiani-4089a</string>
+</resources>

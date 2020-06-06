@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "/Users/alejandro/Downloads/Flutter-BuySell(v1.1)/Mobile Source/Flutter-BuySell/build/url_launcher/intermediates/res/merged/debug/drawable/notification_bg_low.xml",
+        "source": "/Users/alejandro/.gradle/caches/transforms-2/files-2.1/6d39e1d1a026857df556dc58ad676f15/core-1.0.1/res/drawable/notification_bg_low.xml"
+    },
+    {
+        "merged": "/Users/alejandro/Downloads/Flutter-BuySell(v1.1)/Mobile Source/Flutter-BuySell/build/url_launcher/intermediates/res/merged/debug/drawable/notification_bg.xml",
+        "source": "/Users/alejandro/.gradle/caches/transforms-2/files-2.1/6d39e1d1a026857df556dc58ad676f15/core-1.0.1/res/drawable/notification_bg.xml"
+    },
+    {
+        "merged": "/Users/alejandro/Downloads/Flutter-BuySell(v1.1)/Mobile Source/Flutter-BuySell/build/url_launcher/intermediates/res/merged/debug/drawable/notification_icon_background.xml",
+        "source": "/Users/alejandro/.gradle/caches/transforms-2/files-2.1/6d39e1d1a026857df556dc58ad676f15/core-1.0.1/res/drawable/notification_icon_background.xml"
+    },
+    {
+        "merged": "/Users/alejandro/Downloads/Flutter-BuySell(v1.1)/Mobile Source/Flutter-BuySell/build/url_launcher/intermediates/res/merged/debug/drawable/notification_tile_bg.xml",
+        "source": "/Users/alejandro/.gradle/caches/transforms-2/files-2.1/6d39e1d1a026857df556dc58ad676f15/core-1.0.1/res/drawable/notification_tile_bg.xml"
+    }
+]
