@@ -663,10 +663,12 @@ class _AllControllerTextWidgetState extends State<AllControllerTextWidget> {
             //   padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
             //   splashColor: Colors.grey,
             //   onPressed: () async {
-            PSButtonWidget(
-          hasShadow: true,
-          width: double.infinity,
-          titleText: Utils.getString(context, 'login__submit'),
+            Container(
+              width: double.infinity,
+                child: FlatButton(
+                color: PsColors.mainColor,
+                textColor: Colors.white,
+          child: Text(Utils.getString(context, 'login__submit')),
           onPressed: () async {
             // if ((!widget.isSelectedFirstImagePath ||
             //         widget.firstImageId == '') &&
@@ -876,7 +878,7 @@ class _AllControllerTextWidgetState extends State<AllControllerTextWidget> {
               }
             }
           },
-        ));
+        )));
 
     return Column(children: <Widget>[
       PsTextFieldWidget(

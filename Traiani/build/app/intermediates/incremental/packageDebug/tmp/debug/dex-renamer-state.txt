@@ -1,4 +1,4 @@
-#Sat Jun 06 20:32:21 CDT 2020
+#Sat Jun 06 22:30:10 CDT 2020
 path.38=classes_9.dex
 base.10=/Users/alejandro/Desktop/Traiani_mobile/Traiani/build/app/intermediates/dex/debug/mergeLibDexDebug/out/classes_14.dex
 path.37=classes_8.dex

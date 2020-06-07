@@ -60,21 +60,20 @@ class _ChatMakeOfferDialogState extends State<ChatMakeOfferDialog> {
               width: PsDimens.space12,
             ),
             Expanded(
-              child:
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.max,
-              children: <Widget>[
-                Text(widget.itemDetail.title,
-                    style: Theme.of(context).textTheme.body1),
-                const SizedBox(height: PsDimens.space20),
-                Text(
-                  '${Utils.getString(context, 'make_offer_dialog__price')}  ${widget.itemDetail.itemCurrency.currencySymbol} ${widget.itemDetail.price}',
-                  style: Theme.of(context).textTheme.body1,
-                ),
-              ],
-            ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.max,
+                children: <Widget>[
+                  Text(widget.itemDetail.title,
+                      style: Theme.of(context).textTheme.body1),
+                  const SizedBox(height: PsDimens.space20),
+                  Text(
+                    '${Utils.getString(context, 'make_offer_dialog__price')}  ${widget.itemDetail.itemCurrency.currencySymbol} ${widget.itemDetail.price}',
+                    style: Theme.of(context).textTheme.body1,
+                  ),
+                ],
+              ),
             ),
           ],
         ),
@@ -140,16 +139,18 @@ class _ChatMakeOfferDialogState extends State<ChatMakeOfferDialog> {
             //   )),
             //   textColor: Theme.of(context).textTheme.button.copyWith(color: Colors.white).color,
             //   onPressed: () async {
-            PSButtonWidget(
-          hasShadow: true,
-          width: double.infinity,
-          titleText: Utils.getString(
-              context, 'make_offer_dialog__make_offer_btn_name'),
-          onPressed: () async {
-            Navigator.of(context).pop();
-            widget.onMakeOfferTap(priceController.text);
-          },
-        ));
+            Container(
+                width: double.infinity,
+                child: FlatButton(
+                  color: PsColors.mainColor,
+                  textColor: Colors.white,
+                  child: Text(Utils.getString(
+                      context, 'make_offer_dialog__make_offer_btn_name')),
+                  onPressed: () async {
+                    Navigator.of(context).pop();
+                    widget.onMakeOfferTap(priceController.text);
+                  },
+                )));
     return Dialog(
       child: SingleChildScrollView(
         child: Column(

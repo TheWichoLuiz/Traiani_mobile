@@ -218,11 +218,10 @@ class _ButtonWidget extends StatelessWidget {
             child: SizedBox(
               width: double.infinity,
               height: PsDimens.space36,
-              child: PSButtonWidget(
-                hasShadow: false,
-                colorData: PsColors.grey,
-                width: double.infinity,
-                titleText: Utils.getString(context, 'rating_entry__cancel'),
+              child: FlatButton(
+                color: PsColors.grey,
+                textColor: Colors.white,
+                child: Text(Utils.getString(context, 'rating_entry__cancel')),
                 onPressed: () async {
                   Navigator.pop(context);
                 },
@@ -236,10 +235,12 @@ class _ButtonWidget extends StatelessWidget {
             child: SizedBox(
               width: double.infinity,
               height: PsDimens.space36,
-              child: PSButtonWidget(
-                hasShadow: true,
-                width: double.infinity,
-                titleText: Utils.getString(context, 'rating_entry__submit'),
+              child: Container(
+              width: double.infinity,
+              child: FlatButton(
+                color: PsColors.mainColor,
+                textColor: Colors.white,
+                child: Text(Utils.getString(context, 'rating_entry__submit')),
                 onPressed: () async {
                   if (titleController.text.isNotEmpty &&
                       descriptionController.text.isNotEmpty &&
@@ -289,7 +290,7 @@ class _ButtonWidget extends StatelessWidget {
                   }
                 },
               ),
-            ),
+            )),
           )
         ],
       ),

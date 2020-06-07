@@ -1050,74 +1050,79 @@ class __CallAndChatButtonWidgetState extends State<_CallAndChatButtonWidget> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
-                        PSButtonWithIconWidget(
-                          hasShadow: false,
-                          colorData: PsColors.black.withOpacity(0.1),
-                          icon: widget.provider.itemDetail.data.isFavourited !=
-                                  null
-                              ? widget.provider.itemDetail.data.isFavourited ==
-                                      '0'
-                                  ? Icons.favorite_border
-                                  : Icons.favorite
-                              : null,
-                          iconColor: PsColors.mainColor,
-                          width: 60,
-                          titleText: '',
-                          onPressed: () async {
-                            if (await Utils.checkInternetConnectivity()) {
-                              Utils.navigateOnUserVerificationView(
-                                  widget.provider, context, () async {
-                                if (widget.provider.itemDetail.data
-                                        .isFavourited ==
-                                    '0') {
-                                  setState(() {
-                                    widget.provider.itemDetail.data
-                                        .isFavourited = '1';
-                                  });
-                                } else {
-                                  setState(() {
-                                    widget.provider.itemDetail.data
-                                        .isFavourited = '0';
-                                  });
-                                }
+                        Container(
+                            width: double.infinity,
+                            child: FlatButton.icon(
+                              color: PsColors.black.withOpacity(0.1),
+                              icon: Icon(
+                                widget.provider.itemDetail.data.isFavourited !=
+                                        null
+                                    ? widget.provider.itemDetail.data
+                                                .isFavourited ==
+                                            '0'
+                                        ? Icons.favorite_border
+                                        : Icons.favorite
+                                    : null,
+                                color: PsColors.mainColor,
+                              ),
+                              label: null,
+                              onPressed: () async {
+                                if (await Utils.checkInternetConnectivity()) {
+                                  Utils.navigateOnUserVerificationView(
+                                      widget.provider, context, () async {
+                                    if (widget.provider.itemDetail.data
+                                            .isFavourited ==
+                                        '0') {
+                                      setState(() {
+                                        widget.provider.itemDetail.data
+                                            .isFavourited = '1';
+                                      });
+                                    } else {
+                                      setState(() {
+                                        widget.provider.itemDetail.data
+                                            .isFavourited = '0';
+                                      });
+                                    }
 
-                                final FavouriteParameterHolder
-                                    favouriteParameterHolder =
-                                    FavouriteParameterHolder(
-                                        itemId:
+                                    final FavouriteParameterHolder
+                                        favouriteParameterHolder =
+                                        FavouriteParameterHolder(
+                                            itemId: widget
+                                                .provider.itemDetail.data.id,
+                                            userId: widget
+                                                .psValueHolder.loginUserId);
+
+                                    final PsResource<Product> _apiStatus =
+                                        await favouriteProvider.postFavourite(
+                                            favouriteParameterHolder.toMap());
+
+                                    if (_apiStatus.data != null) {
+                                      if (_apiStatus.status ==
+                                          PsStatus.SUCCESS) {
+                                        await widget.provider.loadItemForFav(
                                             widget.provider.itemDetail.data.id,
-                                        userId:
                                             widget.psValueHolder.loginUserId);
-
-                                final PsResource<Product> _apiStatus =
-                                    await favouriteProvider.postFavourite(
-                                        favouriteParameterHolder.toMap());
-
-                                if (_apiStatus.data != null) {
-                                  if (_apiStatus.status == PsStatus.SUCCESS) {
-                                    await widget.provider.loadItemForFav(
-                                        widget.provider.itemDetail.data.id,
-                                        widget.psValueHolder.loginUserId);
-                                  }
-                                  if (widget.provider != null &&
-                                      widget.provider.itemDetail != null &&
-                                      widget.provider.itemDetail.data != null &&
-                                      widget.provider.itemDetail.data
-                                              .isFavourited ==
-                                          '0') {
-                                    icon = Icon(Icons.favorite,
-                                        color: PsColors.mainColor);
-                                  } else {
-                                    icon = Icon(Icons.favorite_border,
-                                        color: PsColors.mainColor);
-                                  }
-                                } else {
-                                  print('There is no comment');
+                                      }
+                                      if (widget.provider != null &&
+                                          widget.provider.itemDetail != null &&
+                                          widget.provider.itemDetail.data !=
+                                              null &&
+                                          widget.provider.itemDetail.data
+                                                  .isFavourited ==
+                                              '0') {
+                                        icon = Icon(Icons.favorite,
+                                            color: PsColors.mainColor);
+                                      } else {
+                                        icon = Icon(Icons.favorite_border,
+                                            color: PsColors.mainColor);
+                                      }
+                                    } else {
+                                      print('There is no comment');
+                                    }
+                                  });
                                 }
-                              });
-                            }
-                          },
-                        ),
+                              },
+                            )),
                         const SizedBox(
                           width: PsDimens.space10,
                         ),
@@ -1126,21 +1131,21 @@ class __CallAndChatButtonWidgetState extends State<_CallAndChatButtonWidget> {
                             widget.provider.itemDetail.data.user.userPhone !=
                                 '')
                           Container(
-                            width: 100,
-                          child: FlatButton.icon(
-                            icon: Icon(Icons.call),
-                            label:
-                                Text(Utils.getString(context, 'item_detail__call')),
-                            onPressed: () async {
-                              if (await canLaunch(
-                                  'tel://${widget.provider.itemDetail.data.user.userPhone}')) {
-                                await launch(
-                                    'tel://${widget.provider.itemDetail.data.user.userPhone}');
-                              } else {
-                                throw 'Could not Call Phone';
-                              }
-                            },
-                          ))
+                              width: 100,
+                              child: FlatButton.icon(
+                                icon: Icon(Icons.call),
+                                label: Text(Utils.getString(
+                                    context, 'item_detail__call')),
+                                onPressed: () async {
+                                  if (await canLaunch(
+                                      'tel://${widget.provider.itemDetail.data.user.userPhone}')) {
+                                    await launch(
+                                        'tel://${widget.provider.itemDetail.data.user.userPhone}');
+                                  } else {
+                                    throw 'Could not Call Phone';
+                                  }
+                                },
+                              ))
                         else
                           Container(),
                         const SizedBox(
@@ -1257,28 +1262,28 @@ class _EditAndDeleteButtonWidget extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       Expanded(
-                        child:
-                            // RaisedButton(
-                            //   child: Text(
-                            //     Utils.getString(context, 'item_detail__delete'),
-                            //     overflow: TextOverflow.ellipsis,
-                            //     maxLines: 1,
-                            //     softWrap: false,
-                            //   ),
-                            //   color: PsColors.grey,
-                            //   shape: const BeveledRectangleBorder(
-                            //       borderRadius: BorderRadius.all(
-                            //     Radius.circular(PsDimens.space8),
-                            //   )),
-                            //   textColor: Theme.of(context).textTheme.button.copyWith(color: PsColors.white).color,
-                            //   onPressed: () async {
-                            PSButtonWithIconWidget(
-                          hasShadow: true,
-                          width: double.infinity,
-                          icon: Icons.delete,
-                          colorData: PsColors.grey,
-                          titleText:
-                              Utils.getString(context, 'item_detail__delete'),
+                          child:
+                              // RaisedButton(
+                              //   child: Text(
+                              //     Utils.getString(context, 'item_detail__delete'),
+                              //     overflow: TextOverflow.ellipsis,
+                              //     maxLines: 1,
+                              //     softWrap: false,
+                              //   ),
+                              //   color: PsColors.grey,
+                              //   shape: const BeveledRectangleBorder(
+                              //       borderRadius: BorderRadius.all(
+                              //     Radius.circular(PsDimens.space8),
+                              //   )),
+                              //   textColor: Theme.of(context).textTheme.button.copyWith(color: PsColors.white).color,
+                              //   onPressed: () async {
+                              Container(
+                        width: double.infinity,
+                        child: FlatButton.icon(
+                          icon: Icon(Icons.delete),
+                          color: PsColors.grey,
+                          label: Text(
+                              Utils.getString(context, 'item_detail__delete')),
                           onPressed: () async {
                             showDialog<dynamic>(
                                 context: context,
@@ -1328,33 +1333,33 @@ class _EditAndDeleteButtonWidget extends StatelessWidget {
                                 });
                           },
                         ),
-                      ),
+                      )),
                       const SizedBox(
                         width: PsDimens.space10,
                       ),
                       Expanded(
-                        child:
-                            //  RaisedButton(
-                            //   child: Text(
-                            //     Utils.getString(context, 'item_detail__edit'),
-                            //     overflow: TextOverflow.ellipsis,
-                            //     maxLines: 1,
-                            //     textAlign: TextAlign.center,
-                            //     softWrap: false,
-                            //   ),
-                            //   color: PsColors.mainColor,
-                            //   shape: const BeveledRectangleBorder(
-                            //       borderRadius: BorderRadius.all(
-                            //     Radius.circular(PsDimens.space8),
-                            //   )),
-                            //   textColor: Theme.of(context).textTheme.button.copyWith(color: PsColors.white).color,
-                            //   onPressed: () async {
-                            PSButtonWithIconWidget(
-                          hasShadow: true,
-                          width: double.infinity,
-                          icon: Icons.edit,
-                          titleText:
-                              Utils.getString(context, 'item_detail__edit'),
+                          child:
+                              //  RaisedButton(
+                              //   child: Text(
+                              //     Utils.getString(context, 'item_detail__edit'),
+                              //     overflow: TextOverflow.ellipsis,
+                              //     maxLines: 1,
+                              //     textAlign: TextAlign.center,
+                              //     softWrap: false,
+                              //   ),
+                              //   color: PsColors.mainColor,
+                              //   shape: const BeveledRectangleBorder(
+                              //       borderRadius: BorderRadius.all(
+                              //     Radius.circular(PsDimens.space8),
+                              //   )),
+                              //   textColor: Theme.of(context).textTheme.button.copyWith(color: PsColors.white).color,
+                              //   onPressed: () async {
+                              Container(
+                        width: double.infinity,
+                        child: FlatButton.icon(
+                          icon: Icon(Icons.edit),
+                          label:
+                              Text(Utils.getString(context, 'item_detail__edit')),
                           onPressed: () async {
                             Navigator.pushNamed(context, RoutePaths.itemEntry,
                                 arguments: ItemEntryIntentHolder(
@@ -1362,7 +1367,7 @@ class _EditAndDeleteButtonWidget extends StatelessWidget {
                                     item: provider.itemDetail.data));
                           },
                         ),
-                      ),
+                      )),
                     ],
                   ),
                 ),
@@ -1501,25 +1506,25 @@ class _PromoteTileViewState extends State<PromoteTileView> {
                     padding: const EdgeInsets.only(left: PsDimens.space12),
                     child: SizedBox(
                         width: PsDimens.space180,
-                        child: PSButtonWithIconWidget(
-                            hasShadow: false,
+                        child: Container(
                             width: double.infinity,
-                            icon: Ionicons.ios_megaphone,
-                            titleText:
-                                Utils.getString(context, 'item_detail__promte'),
-                            onPressed: () async {
-                              final dynamic returnData =
-                                  await Navigator.pushNamed(
-                                      context, RoutePaths.itemPromote,
-                                      arguments: widget.product);
-                              if (returnData) {
-                                final String loginUserId =
-                                    Utils.checkUserLoginId(
-                                        widget.provider.psValueHolder);
-                                widget.provider.loadProduct(
-                                    widget.product.id, loginUserId);
-                              }
-                            })),
+                            child: FlatButton.icon(
+                                icon: Icon(Ionicons.ios_megaphone),
+                                label: Text(Utils.getString(
+                                    context, 'item_detail__promte')),
+                                onPressed: () async {
+                                  final dynamic returnData =
+                                      await Navigator.pushNamed(
+                                          context, RoutePaths.itemPromote,
+                                          arguments: widget.product);
+                                  if (returnData) {
+                                    final String loginUserId =
+                                        Utils.checkUserLoginId(
+                                            widget.provider.psValueHolder);
+                                    widget.provider.loadProduct(
+                                        widget.product.id, loginUserId);
+                                  }
+                                }))),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(

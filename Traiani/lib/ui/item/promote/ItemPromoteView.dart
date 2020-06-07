@@ -278,12 +278,10 @@ class AdsHowManyDayWidgetState extends State<AdsHowManyDayWidget> {
           bottom: PsDimens.space16),
       width: double.infinity,
       height: PsDimens.space44,
-      child: PSButtonWithIconWidget(
-          hasShadow: true,
-          icon: FontAwesome.paypal,
-          width: double.infinity,
-          colorData: PsColors.paypalColor,
-          titleText: Utils.getString(context, 'item_promote__paypal'),
+      child: FlatButton.icon(
+          icon: Icon(FontAwesome.paypal),
+          color: PsColors.paypalColor,
+          label: Text(Utils.getString(context, 'item_promote__paypal')),
           onPressed: () async {
             // if(widget.tokenProvider != null)
 
@@ -387,79 +385,79 @@ class AdsHowManyDayWidgetState extends State<AdsHowManyDayWidget> {
           }),
     );
     final Widget stripeButtonWidget = Container(
-      margin: const EdgeInsets.only(
-          left: PsDimens.space16,
-          right: PsDimens.space16,
-          bottom: PsDimens.space48),
-      width: double.infinity,
-      height: PsDimens.space44,
-      child: PSButtonWithIconWidget(
-          hasShadow: true,
+        margin: const EdgeInsets.only(
+            left: PsDimens.space16,
+            right: PsDimens.space16,
+            bottom: PsDimens.space48),
+        width: double.infinity,
+        height: PsDimens.space44,
+        child: Container(
           width: double.infinity,
-          icon: FontAwesome.cc_stripe,
-          titleText: Utils.getString(context, 'item_promote__stripe'),
-          colorData: PsColors.stripeColor,
-          onPressed: () async {
-              if (double.parse(amount) <= 0) {
-              return;
-            }
-            final ItemPromotionProvider provider =
-                Provider.of<ItemPromotionProvider>(context, listen: false);
-
-            if (provider.selectedDate == null) {
-              showDialog<dynamic>(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return WarningDialog(
-                      message: Utils.getString(
-                          context, 'item_promote__choose_start_date'),
-                    );
-                  });
-            } else {
-              final AppInfoProvider appProvider =
-                  Provider.of<AppInfoProvider>(context, listen: false);
-              stripePublishableKey =
-                  appProvider.appInfo.data.stripePublishableKey;
-
-              if (provider.selectedDate != null) {
-                startDate = provider.selectedDate;
-              }
-              if (getEnterDateCountController.text != '') {
-                howManyDay = getEnterDateCountController.text;
-
-                final AppInfoProvider provider =
-                    Provider.of<AppInfoProvider>(context, listen: false);
-                final double amountByEnterDay = double.parse(howManyDay) *
-                    double.parse(provider.appInfo.data.oneDay);
-                amount = amountByEnterDay.toString();
-                stripePublishableKey =
-                    provider.appInfo.data.stripePublishableKey;
-              }
-
-              final DateTime dateTime = DateTime.now();
-              final int resultStartTimeStamp =
-                  Utils.getTimeStampDividedByOneThousand(dateTime);
-
-              if (provider != null) {
-                final dynamic returnData = await Navigator.pushNamed(
-                    context, RoutePaths.creditCard,
-                    arguments: PaidHistoryHolder(
-                        product: widget.product,
-                        amount: amount,
-                        howManyDay: howManyDay,
-                        paymentMethod: PsConst.PAYMENT_STRIPE_METHOD,
-                        stripePublishableKey: stripePublishableKey,
-                        startDate: startDate,
-                        startTimeStamp: resultStartTimeStamp.toString(),
-                        itemPaidHistoryProvider: provider));
-
-                if (returnData != null && returnData) {
-                  Navigator.pop(context, true);
+          child: FlatButton.icon(
+              icon: Icon(FontAwesome.cc_stripe),
+              label: Text(Utils.getString(context, 'item_promote__stripe')),
+              color: PsColors.stripeColor,
+              onPressed: () async {
+                if (double.parse(amount) <= 0) {
+                  return;
                 }
-              }
-            }
-          }),
-    );
+                final ItemPromotionProvider provider =
+                    Provider.of<ItemPromotionProvider>(context, listen: false);
+
+                if (provider.selectedDate == null) {
+                  showDialog<dynamic>(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return WarningDialog(
+                          message: Utils.getString(
+                              context, 'item_promote__choose_start_date'),
+                        );
+                      });
+                } else {
+                  final AppInfoProvider appProvider =
+                      Provider.of<AppInfoProvider>(context, listen: false);
+                  stripePublishableKey =
+                      appProvider.appInfo.data.stripePublishableKey;
+
+                  if (provider.selectedDate != null) {
+                    startDate = provider.selectedDate;
+                  }
+                  if (getEnterDateCountController.text != '') {
+                    howManyDay = getEnterDateCountController.text;
+
+                    final AppInfoProvider provider =
+                        Provider.of<AppInfoProvider>(context, listen: false);
+                    final double amountByEnterDay = double.parse(howManyDay) *
+                        double.parse(provider.appInfo.data.oneDay);
+                    amount = amountByEnterDay.toString();
+                    stripePublishableKey =
+                        provider.appInfo.data.stripePublishableKey;
+                  }
+
+                  final DateTime dateTime = DateTime.now();
+                  final int resultStartTimeStamp =
+                      Utils.getTimeStampDividedByOneThousand(dateTime);
+
+                  if (provider != null) {
+                    final dynamic returnData = await Navigator.pushNamed(
+                        context, RoutePaths.creditCard,
+                        arguments: PaidHistoryHolder(
+                            product: widget.product,
+                            amount: amount,
+                            howManyDay: howManyDay,
+                            paymentMethod: PsConst.PAYMENT_STRIPE_METHOD,
+                            stripePublishableKey: stripePublishableKey,
+                            startDate: startDate,
+                            startTimeStamp: resultStartTimeStamp.toString(),
+                            itemPaidHistoryProvider: provider));
+
+                    if (returnData != null && returnData) {
+                      Navigator.pop(context, true);
+                    }
+                  }
+                }
+              }),
+        ));
 
     return Consumer<AppInfoProvider>(builder:
         (BuildContext context, AppInfoProvider appInfoprovider, Widget child) {
